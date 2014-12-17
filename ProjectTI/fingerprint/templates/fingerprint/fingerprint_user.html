@@ -10,8 +10,13 @@
 
 {% block content %}
 <ul data-role="listview" data-inset="true">
-    <li>{{ fingerprint.first_finger }}</li>
-    <li>{{ fingerprint.second_finger }}</li>
-    <li>{{ fingerprint.third_finger }}</li>
+    {% if fingerprint %}
+        <li>{{ fingerprint.first_finger }}</li>
+        <li>{{ fingerprint.second_finger }}</li>
+        <li>{{ fingerprint.third_finger }}</li>
+    {% else %}
+        <h2>No Fingerprints created!</h2>
+        <a href="#" class="ui-btn ui-shadow">Create Fingerprint</a>
+    {% endif %}
 </ul>
 {% endblock %}
