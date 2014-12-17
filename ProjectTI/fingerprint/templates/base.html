@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Fingerprint Scanner</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{% static "css/jquery.mobile-1.4.4.min.css" %}">
+        <script language="javascript" type="text/javascript" src="{% static "js/jquery-1.11.1.min.js" %}"></script>
+
+
+        <script type="text/javascript">
+            $(document).bind("mobileinit", function(){
+                 $.mobile.ajaxEnabled = false;
+                 });
+        </script>
+
+        <script language="javascript" type="text/javascript" src="{% static "js/jquery.mobile-1.4.4.min.js" %}"></script>
+    </head>
+
+    <body>
+        <div data-role="page">
+            <div data-role="panel" id="sidebar">
+                <h1>Menu</h1>
+                {% block sidebar %}{% endblock %}
+                <a href="{% url 'logout' %}" class="ui-btn ui-shadow">Logout</a>
+            </div>
+            <div data-role="header" data-position="fixed">
+                <a href="#sidebar" data-icon="gear" style={% block attr %}{% endblock %}>Menu</a>
+                {% block header %}{% endblock %}
+            </div>
+            <div data-role="content">
+                {% block content %}{% endblock %}
+            </div>
+            <div data-role="footer">
+                {% block footer%}{% endblock %}
+            <div>
+        </div>
+    </body>
+</html>

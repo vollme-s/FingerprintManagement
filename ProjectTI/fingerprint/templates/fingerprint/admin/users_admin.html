@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% include "fingerprint/sidebar_admin.html" %}
+{% endblock %}
+
+{% block header %}
+<h1>Admin Users</h1>
+{% endblock %}
+
+{% block content %}
+
+<form class="ui-filterable">
+    <input id="search-auto-input" data-type="search" placeholder="search user">
+</form>
+<ul data-role="listview" data-filter="true" data-inset="true" data-input="#search-auto-input">
+    <li data-role="list-divider">Available Users:</li>
+    {% for user in user_list %}
+        <li><a href="{% url 'edit_user_admin' user.id %}">{{ user.username }}</a></li>
+    {% endfor%}
+</ul>
+{% endblock %}

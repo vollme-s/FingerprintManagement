@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% include "fingerprint/sidebar_user.html" %}
+{% endblock %}
+
+{% block header %}
+<h1>Home</h1>
+{% endblock %}
+
+{% block content %}
+<ul data-role="listview" data-inset="true">
+    <li><a href="{% url 'profile_user' %}">Profile</a></li>
+    <li><a href="{% url 'doors_user' %}">My Doors</a></li>
+    <li><a href="{% url 'fingerprint_user' %}">Fingerprints</a></li>
+</ul>
+{% endblock %}
+

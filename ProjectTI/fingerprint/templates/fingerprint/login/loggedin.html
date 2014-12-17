@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block attr %}
+"display:none;"
+{% endblock %}
+
+
+{% block header %}
+<h1>Loggedin</h1>
+{% endblock %}
+
+
+{% block content %}
+<h2>Hi {{ full_name }} Logged in!</h2>
+<p>Click <a href="/fingerprint/accounts/logout/">here</a> to logout </p>
+{% endblock %}

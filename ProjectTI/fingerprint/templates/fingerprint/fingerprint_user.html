@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% include "fingerprint/sidebar_user.html" %}
+{% endblock %}
+
+{% block header %}
+<h1>Fingerprints</h1>
+{% endblock %}
+
+{% block content %}
+<ul data-role="listview" data-inset="true">
+    <li>{{ fingerprint.first_finger }}</li>
+    <li>{{ fingerprint.second_finger }}</li>
+    <li>{{ fingerprint.third_finger }}</li>
+</ul>
+{% endblock %}

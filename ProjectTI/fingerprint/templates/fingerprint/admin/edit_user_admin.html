@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% include "fingerprint/sidebar_admin.html" %}
+{% endblock %}
+
+{% block header %}
+<h1>Edit User</h1>
+{% endblock %}
+
+{% block content %}
+<h2>User:  {{ user.username }}</h2>
+<p>Name:  {{ user.first_name }} {{ user.last_name }}</p>
+<p>Email: {{ user.email }}</p>
+
+<form action="{% url 'save_admin_user_changes' user.id%}" method="post">{% csrf_token %}
+    <label>
+        <input type="checkbox" name="is-staff-check" {{ option }}>Is Staff
+    </label>
+    <legend>Available Doors:</legend>
+    <fieldset data-role="controlgroup">
+        {% for door in door_list%}
+            {% if door in user_door_list%}
+                <input type="checkbox" name="{{ door.name }}" id="{{ door.name }}" checked>
+                    <label for="{{ door.name }}">{{ door.name }}</label>
+                </input>
+            {% else %}
+                <input type="checkbox" name="{{ door.name }}" id="{{ door.name }}">
+                    <label for="{{ door.name }}">{{ door.name }}</label>
+                </input>
+            {% endif %}
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Save Changes">
+</form>
+
+
+{% endblock %}

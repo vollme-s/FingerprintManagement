@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% include "fingerprint/sidebar_admin.html" %}
+{% endblock %}
+
+{% block header %}
+<h1>Admin Doors</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Add new Door</h2>
+<form action="{% url 'add_door_admin' %}" method="post">{% csrf_token %}
+    <div data-role="fieldcontain" class="ui-hide-lable">
+        <label for="username">Door Name:</label>
+        <input type="text" name="door_name" id="door_name" placeholder="door name" />
+    </div>
+    <input type="submit" value="Save Changes">
+</form>
+<h2>Doors</h2>
+<form class="ui-filterable">
+    <input id="search-auto-input" data-type="search" placeholder="search door">
+</form>
+<ul data-role="listview" data-filter="true" data-inset="true" data-input="#search-auto-input">
+    <li data-role="list-divider">Available Doors:</li>
+    {% for door in door_list %}
+        <li>
+            <a href="{% url 'edit_door_admin' door.id %}">{{ door.name }}</a>
+        </li>
+    {% endfor%}
+</ul>
+{% endblock %}

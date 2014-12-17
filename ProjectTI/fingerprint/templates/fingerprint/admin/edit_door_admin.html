@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% include "fingerprint/sidebar_admin.html" %}
+{% endblock %}
+
+{% block header %}
+<h1>Edit Door</h1>
+{% endblock %}
+
+{% block content %}
+<h2>{{ door.name }}</h2>
+<form class="ui-filterable">
+    <input id="search-auto-input" data-type="search" placeholder="search user">
+</form>
+<form action="{% url 'save_admin_door_changes' door.id%}" method="post">{% csrf_token %}
+    <fieldset data-role="controlgroup" data-filter="true" data-input="#search-auto-input">
+        {% for user in user_list%}
+            {% if user in door_user_list%}
+                <input type="checkbox" name="{{ user.username }}" id="{{ user.username }}" checked>
+                    <label for="{{ user.username }}">{{ user.username }}</label>
+                </input>
+            {% else %}
+                <input type="checkbox" name="{{ user.username }}" id="{{ user.username }}">
+                    <label for="{{ user.username }}">{{ user.username }}</label>
+                </input>
+            {% endif %}
+        {% endfor %}
+    </fieldset>
+    <input type="submit" value="Save Changes">
+</form>
+<a href="#delete" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-icon-delete ui-btn-icon-left ui-btn-inline">Delete Door</a>
+
+<div data-role="popup" id="delete" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em">
+    <h3>Delete Door?</h3>
+    <p>Are your sure that you want to delete {{ door.name }}?!</p>
+    <a href="#" data-rel="back" class="ui-shadow ui-btn ui-btn-inline ui-mini">YES</a>
+    <a href="#" data-rel="back" class="ui-shadow ui-btn ui-btn-inline ui-mini">CANCEL</a>
+</div>
+
+{% endblock %}

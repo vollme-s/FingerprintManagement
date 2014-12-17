@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block sidebar %}
+{% include "fingerprint/sidebar_user.html" %}
+{% endblock %}
+
+{% block header %}
+<h1>My Doors</h1>
+{% endblock %}
+
+{% block content %}
+<ul data-role="listview" data-inset="true">
+    {% for key, value in door_log_dict.items %}
+        <li data-role="collapsible" data-iconpos="right" data-inset="true">
+            <h2>{{ value.name }}</h2>
+            <ul data-role="listview" data-inset="true">
+                {% for log in key %}
+                    <li>
+                        <p>{{log.user.username}}</p>
+                        <p>{{log.door}}</p>
+                        <p>{{log.datetime}}</p>
+                        <p>{{log.message}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor%}
+</ul>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block sidebar %}
+{% include "fingerprint/sidebar_admin.html" %}
+{% endblock %}
+
+{% block header %}
+<h1>Admin Home</h1>
+{% endblock %}
+
+{% block content %}
+<ul data-role="listview" data-inset="true">
+    <li><a href="{% url 'users_admin' %}">Users</a></li>
+    <li><a href="{% url 'doors_admin' %}">Doors</a></li>
+</ul>
+{% endblock %}

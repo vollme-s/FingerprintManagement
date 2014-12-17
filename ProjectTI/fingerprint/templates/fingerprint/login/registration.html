@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block attr %}
+"display:none;"
+{% endblock %}
+
+{% block header %}
+<h1>Registration</h1>
+{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'registrate' %}" method="post">{% csrf_token %}
+    <div data-role="fieldcontain" class="ui-hide-lable">
+        <label for="username">First Name:</label>
+        <input type="text" name="username" id="username" value="" placeholder="username"/>
+    </div>
+    <div data-role="fieldcontain" class="ui-hide-lable">
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" id="first_name" value="" placeholder="firstname"/>
+    </div>
+    <div data-role="fieldcontain" class="ui-hide-lable">
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" id="last_name" value="" placeholder="lastname"/>
+    </div>
+    <div data-role="fieldcontain" class="ui-hide-lable">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" value="" placeholder="email@email.com"/>
+    </div>
+    <div data-role="fieldcontain" class="ui-hide-lable">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" value="" placeholder="Password"/>
+    </div>
+    <input type="submit" value="registrate">
+</form>
+
+{% endblock %}
