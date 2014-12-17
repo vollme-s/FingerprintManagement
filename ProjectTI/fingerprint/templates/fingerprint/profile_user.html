@@ -11,7 +11,7 @@
 {% block content %}
 <form action="{% url 'save_profile_changes' %}" method="post">{% csrf_token %}
     <div data-role="fieldcontain" class="ui-hide-lable">
-        <label for="username">First Name:</label>
+        <label for="username">Username:</label>
         <input type="text" name="username" id="username" value= "{{ username }}" placeholder="username" />
     </div>
     <div data-role="fieldcontain" class="ui-hide-lable">
