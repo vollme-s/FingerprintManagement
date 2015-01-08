@@ -16,7 +16,6 @@ def loggedin(request):
     return render_to_response('fingerprint/login/loggedin.html',
                               {'full_name': request.user.username})
 
-
 def invalid_login(request):
     return render_to_response('fingerprint/login/invalid_login.html')
 
@@ -46,7 +45,7 @@ def logout(request):
     return redirect('/fingerprint/accounts/login/')
 
 
-def registration(request):
+def registration(request): 
     c = {}
     c.update(csrf(request))
     return render_to_response('fingerprint/login/registration.html', c)
@@ -63,7 +62,11 @@ def registrate_user(request):
         user = User.objects.create_user(username=username, email=email,
              first_name=first_name, last_name=last_name, password=password)
         if user:
-            return redirect('/fingerprint/home_user/')
+            
+            message = "Your registration has been accepted!"
+            context = {'message': message,
+                       'username': username,}    
+            return render_to_response('fingerprint/login/info.html', context)
         else:
             return redirect('/fingerprint/accounts/loggedin/')
     else:

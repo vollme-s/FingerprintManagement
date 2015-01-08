@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block attr %}
+"display:none;"
+{% endblock %}
+
+
+{% block header %}
+<h1>Loggedin</h1>
+{% endblock %}
+
+{% block content %}
+<meta http-equiv="refresh" content="5; url={% url 'login' %}" />
+<h2>Hi {{ username }}</h2>
+<h3>{{ message }}</h3>
+<p>You will be redirected automatically in a few seconds!</p>
+<p>Otherwise click <a href="{% url 'login' %}">here</a> to go on</p>
+{% endblock %}

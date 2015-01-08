@@ -8,7 +8,6 @@ from fingerprint.models import Log
 
 # Create your views here.
 
-
 @login_required(login_url='/fingerprint/accounts/login/')
 def home_user(request):
     return render_to_response('fingerprint/home_user.html')
