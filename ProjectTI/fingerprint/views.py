@@ -5,6 +5,7 @@ from django.core.context_processors import csrf
 from fingerprint.models import Fingerprint
 from fingerprint.models import Door
 from fingerprint.models import Log
+from test.test_index import oldstyle
 
 # Create your views here.
 
@@ -50,12 +51,17 @@ def save_profile_changes(request):
     first_name = request.POST.get('first_name', '')
     last_name = request.POST.get('last_name', '')
     email = request.POST.get('email', '')
+    oldpass = request.POST.get('old_password','')
+    newpass = request.POST.get('new_password','')
 
     if username and email:
         user.username = username
         user.first_name = first_name
         user.last_name = last_name
         user.email = email
+        if (oldpass and newpass):
+            if (user.check_password(oldpass)):
+                user.set_password(newpass)            
         user.save()
     return redirect("/fingerprint/profile_user/")
 
