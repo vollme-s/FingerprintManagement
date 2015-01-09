@@ -26,7 +26,22 @@
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" value="{{ email }}" placeholder="email@email.com"/>
     </div>
+    <div data-role="fieldcontain" class="ui-hide-lable">
+    	<label for="old_password">Old Password:</label>
+    	<input type="password" name="old_password" id="old_password" placeholder="old password"/>
+    </div>
+    <div data-role="fieldcontain" class="ui-hide-lable">
+    	<label for="new_password">New Password:</label>
+    	<input type="password" name="new_password" id="new_password" placeholder="new password"/>
+    </div>
+    <div data-role="fieldcontain" class="ui-hide-lable">
+    	<label for="new_password_again">New Password again:</label>
+    	<input type="password" name="new_password_again" id="new_password_again" placeholder="new password again"/>
+    </div>
     <input type="submit" value="Save Changes">
+    
 </form>
+
+
 
 {% endblock %}
