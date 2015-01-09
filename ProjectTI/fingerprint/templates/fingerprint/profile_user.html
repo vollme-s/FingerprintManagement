@@ -39,7 +39,21 @@
     	<input type="password" name="new_password_again" id="new_password_again" placeholder="new password again"/>
     </div>
     <input type="submit" value="Save Changes">
-    
+    <script>
+	  $('input').bind('input', function() {
+		if ($('#new_password_again').val() != $('#new_password').val()) {
+			$('#new_password_again').css("color", "red");
+			$('[type="submit"]').button('disable');
+			$('[type="submit"]').button('refresh');
+			return false;
+		} else {
+			$('#new_password_again').css("color", "black");
+			$('[type="submit"]').button('enable');
+			$('[type="submit"]').button('refresh');
+			return true; 
+		}
+		}).change();
+	</script>
 </form>
 
 
