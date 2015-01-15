@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^profile_user/$', views.profile_user, name='profile_user'),
     url(r'^save_profile_changes/$', views.save_profile_changes, name='save_profile_changes'),
     url(r'^fingerprint_user/$', views.fingerprint_user, name='fingerprint_user'),
+    url(r'^fingerprint_enrollment/$', views.start_enrollment, name='enrollment'),
 
     url(r'^home_admin/$', views_admin.home_admin, name='home_admin'),
     url(r'^users_admin/$', views_admin.users_admin, name='users_admin'),

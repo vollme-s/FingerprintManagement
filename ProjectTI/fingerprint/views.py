@@ -5,6 +5,7 @@ from django.core.context_processors import csrf
 from fingerprint.models import Fingerprint
 from fingerprint.models import Door
 from fingerprint.models import Log
+from sensor.HardwareMain import enrollment
 from test.test_index import oldstyle
 
 # Create your views here.
@@ -74,5 +75,21 @@ def fingerprint_user(request):
     context = {'username': username,
                'fingerprint': fingerprint}
     return render_to_response("fingerprint/fingerprint_user.html", context)
+
+@login_required(login_url='/fingerprint/accounts/login/')
+def start_enrollment(request):
+    user = request.user
+    username = user.username
+    fingerprint = Fingerprint.objects.filter(user=user).first()
+    context = {'username': username,
+               'fingerprint': fingerprint}
+    retVal = enrollment()
+    if(retVal != False):
+        print("true")
+    else:
+        print("false")
+        
+    return render_to_response("fingerprint/fingerprint_user.html", context)
+        
 
 
