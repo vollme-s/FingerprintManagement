@@ -1,3 +1,4 @@
 *.pyc
 HardwareMain.py
 test.html
+/sensor/

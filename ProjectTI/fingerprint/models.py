@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Fingerprint(models.Model):
     user = models.ForeignKey(User, unique=True)
-    template = models.CharField(max_length=500)
+    template = models.CharField(max_length=5000)
 
     def __str__(self):
         return self.user.username

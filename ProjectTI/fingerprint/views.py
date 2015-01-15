@@ -7,6 +7,8 @@ from fingerprint.models import Door
 from fingerprint.models import Log
 from sensor.HardwareMain import enrollment
 
+import base64
+
 # Create your views here.
 
 @login_required(login_url='/fingerprint/accounts/login/')
@@ -71,6 +73,8 @@ def fingerprint_user(request):
     user = request.user
     username = user.username
     fingerprint = Fingerprint.objects.filter(user=user).first()
+    if(fingerprint):
+        print(base64.b64decode(fingerprint.template))
     context = {'username': username,
                'fingerprint': fingerprint}
     return render_to_response("fingerprint/fingerprint_user.html", context)
@@ -83,10 +87,11 @@ def start_enrollment(request):
     if(fingerprint):
         fingerprint[0].delete()
     retVal = enrollment()
-    print(retVal)
+    test = base64.b64encode(retVal)
+    print(test)
     if(retVal != False):
         print("true")
-        Fingerprint.objects.create(user=user, template=retVal)
+        Fingerprint.objects.create(user=user, template=test)
     else:
         print("false")
         
