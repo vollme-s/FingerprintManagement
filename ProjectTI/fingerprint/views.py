@@ -6,7 +6,6 @@ from fingerprint.models import Fingerprint
 from fingerprint.models import Door
 from fingerprint.models import Log
 from sensor.HardwareMain import enrollment
-from test.test_index import oldstyle
 
 # Create your views here.
 
@@ -83,7 +82,7 @@ def start_enrollment(request):
     fingerprint = Fingerprint.objects.filter(user=user)
     if(fingerprint):
         fingerprint[0].delete()
-    retVal = "bla" #enrollment()
+    retVal = enrollment()
     if(retVal != False):
         print("true")
         Fingerprint.objects.create(user=user, template=retVal)
