@@ -80,16 +80,17 @@ def fingerprint_user(request):
 def start_enrollment(request):
     user = request.user
     username = user.username
-    fingerprint = Fingerprint.objects.filter(user=user).first()
-    context = {'username': username,
-               'fingerprint': fingerprint}
-    retVal = enrollment()
+    fingerprint = Fingerprint.objects.filter(user=user)
+    if(fingerprint):
+        fingerprint[0].delete()
+    retVal = "bla" #enrollment()
     if(retVal != False):
         print("true")
+        Fingerprint.objects.create(user=user, template=retVal)
     else:
         print("false")
         
-    return render_to_response("fingerprint/fingerprint_user.html", context)
+    return redirect("/fingerprint/fingerprint_user/")
         
 
 
