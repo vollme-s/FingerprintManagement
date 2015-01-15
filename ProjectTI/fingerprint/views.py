@@ -83,6 +83,7 @@ def start_enrollment(request):
     if(fingerprint):
         fingerprint[0].delete()
     retVal = enrollment()
+    print(retVal)
     if(retVal != False):
         print("true")
         Fingerprint.objects.create(user=user, template=retVal)
