@@ -10,8 +10,8 @@
 
 {% block content %}
 <ul data-role="listview" data-inset="true">
-    {% if fingerprint %}
-        <li>{{ fingerprint.template }}</li>
+    {% if template %}
+        <li>{{ template }}</li>
         <a href="{% url 'enrollment' %}" class="ui-btn ui-shadow">Change Fingerprint</a>
     {% else %}
         <h2>No Fingerprints created</h2>
