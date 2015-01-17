@@ -75,6 +75,8 @@ def fingerprint_user(request):
     fingerprint = Fingerprint.objects.filter(user=user)
     if(fingerprint):
         template = base64.b64decode(fingerprint[0].template)
+    else:
+        template = ''
     context = {'username': username,
                'template': template}
     return render_to_response("fingerprint/fingerprint_user.html", context)
