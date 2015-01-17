@@ -72,21 +72,23 @@ def save_profile_changes(request):
 def fingerprint_user(request):
     user = request.user
     username = user.username
-    fingerprint = Fingerprint.objects.filter(user=user).first()
+    fingerprint = Fingerprint.objects.filter(user=user)
+    if(fingerprint):
+        template = base64.b64decode(fingerprint[0].template)
+    else:
+        template = ''
     context = {'username': username,
-               'fingerprint': fingerprint}
+               'template': template}
     return render_to_response("fingerprint/fingerprint_user.html", context)
 
 @login_required(login_url='/fingerprint/accounts/login/')
 def start_enrollment(request):
     user = request.user
-    username = user.username
     fingerprint = Fingerprint.objects.filter(user=user)
     if(fingerprint):
         fingerprint[0].delete()
     retVal = enrollment()
     test = base64.b64encode(retVal)
-    print(test)
     if(retVal != False):
         print("true")
         Fingerprint.objects.create(user=user, template=test)
