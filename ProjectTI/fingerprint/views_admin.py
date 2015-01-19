@@ -52,12 +52,12 @@ def save_admin_user_changes(request, user_id):
     for door in door_list:
         door_access = request.POST.get(door.name, '')
         if door_access == 'on':
-            door.allowed_users.add(user)
             if(template):
+                door.allowed_users.add(user)
                 setTemplate(template)
         else:
-            door.allowed_users.remove(user)
             if(template):
+                door.allowed_users.remove(user)
                 deleteTemplate(template)
         door.save()
 
