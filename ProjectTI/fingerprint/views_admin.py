@@ -7,6 +7,8 @@ from fingerprint.models import Door
 from fingerprint.models import Fingerprint
 from sensor.HardwareMain import setTemplate, deleteTemplate
 
+import base64
+
 
 @user_passes_test(lambda u: u.is_staff, login_url='/fingerprint/accounts/login/?priv=Admin')
 def home_admin(request):
@@ -43,7 +45,8 @@ def edit_user_admin(request, user_id):
 @user_passes_test(lambda u: u.is_staff, login_url='/fingerprint/accounts/login/?priv=Admin')
 def save_admin_user_changes(request, user_id):
     user = User.objects.filter(id=user_id).first()
-    template = Fingerprint.objects.filter(user=user).first()
+    fingerprint = Fingerprint.objects.filter(user=user)
+    template = base64.b64decode(fingerprint[0].template)
     is_staff = request.POST.get('is-staff-check', '')
     door_list = Door.objects.all().order_by('name')
     for door in door_list:
@@ -51,11 +54,11 @@ def save_admin_user_changes(request, user_id):
         if door_access == 'on':
             door.allowed_users.add(user)
             if(template):
-                setTemplate(template.template)
+                setTemplate(template)
         else:
             door.allowed_users.remove(user)
             if(template):
-                deleteTemplate(template.template)
+                deleteTemplate(template)
         door.save()
 
     if is_staff == 'on':
