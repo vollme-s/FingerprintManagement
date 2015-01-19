@@ -14,6 +14,6 @@ class MyAppConfig(AppConfig):
     verbose_name = 'fingerprint scanner'
  
     def ready(self):
-       initHardware()
+        initHardware()
         
         
